@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('recipe');
+  return allBlogPosts.map(recipe => (
+  { 
+    params: { 
+      slug: recipe.slug,
+    },
+    props: {
+      recipe
+    }
+  }
+));
+}
+
+const { recipe } = Astro.props;
+---
+
+<Layout title={`${recipe.data.name} | White Family Cookbook`}>
+  <main>
+    <div class="recipe-content-wrapper">
+      <div>
+        <h1>{recipe.data.name}</h1>
+        <p>By {recipe.data.author}</p>
+        <a href="/">Back to all recipes</a>
+      </div>
+      <div>
+        <h3>Instructions</h3>
+        <p>{recipe.data.instructions}</p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  h1, h2, h3, p {
+    margin: 0;
+  }
+
+  .recipe-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+</style>
