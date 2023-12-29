@@ -17,19 +17,42 @@ export async function getStaticPaths() {
 }
 
 const { recipe } = Astro.props;
+console.log(recipe)
+const { 
+  instructions, 
+  ingredients,
+  comments,
+  name, 
+  author,
+  servingsNumber,
+  prepTime,
+  nutritionFacts
+} = recipe.data;
 ---
 
-<Layout title={recipe.data.name}>
+<Layout title={name}>
   <main>
     <div class="recipe-content-wrapper">
-      <div>
-        <h1>{recipe.data.name}</h1>
-        <p>By {recipe.data.author}</p>
-        <a href="/">Back to all recipes</a>
+      <div class="recipe-header">
+        <h1>{name}</h1>
+        <a href="/" style="margin-bottom: 5px;">Back to all recipes</a>
+        <p>{author}</p>
+        <p>Makes {servingsNumber} servings</p>
+        <p>Prep Time: {prepTime}</p>
       </div>
-      <div>
-        <h3>Instructions</h3>
-        <p>{recipe.data.instructions}</p>
+      <div class="recipe-instructions">
+        <ol>
+          { 
+            instructions.map(instruction => (
+              <li>{instruction}</li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="recipe-bottom-info">
+        { comments && <p class="recipe-comments">{comments}</p> }
+        <div class="divider"></div>
+        { nutritionFacts && <p class="recipe-nutrition-facts">{nutritionFacts}</p> }
       </div>
     </div>
   </main>
@@ -40,9 +63,33 @@ const { recipe } = Astro.props;
     margin: 0;
   }
 
+  main {
+    width: fit-content;
+    max-width: 1280px;
+  }
+
+  ol {
+    padding-left: 1rem;
+  }
+
+  .divider {
+    background: black;
+    height: 1px;
+    width: 100%;
+  }
+
   .recipe-content-wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
+
+  .recipe-header,
+  .recipe-bottom-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+
 </style>
