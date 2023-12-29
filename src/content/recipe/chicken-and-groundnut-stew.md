@@ -1,6 +1,6 @@
 ---
 name: Chicken and Groundnut Stew
-author: Bob
+author: Molly Smillie
 category: Entrees
 instructions: Cook the chicken
 ---
