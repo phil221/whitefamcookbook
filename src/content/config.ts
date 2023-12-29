@@ -9,8 +9,13 @@ const recipeCollection = defineCollection({
     schema: z.object({
         name: z.string(),
         author: z.enum(recipeAuthors),
+        servingsNumber: z.number(),
+        prepTime: z.string(),
+        ingredients: z.array(z.string()),
+        instructions: z.array(z.string()),
+        comments: z.string().optional(),
+        nutritionFacts: z.string().optional(),
         category: z.enum(recipeCategories),
-        instructions: z.string(),
         image: z.string().optional()
     })
  });
