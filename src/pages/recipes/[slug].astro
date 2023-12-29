@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 const { recipe } = Astro.props;
 ---
 
-<Layout title={`${recipe.data.name} | White Family Cookbook`}>
+<Layout title={recipe.data.name}>
   <main>
     <div class="recipe-content-wrapper">
       <div>
