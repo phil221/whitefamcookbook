@@ -1,6 +1,6 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection, z } from 'astro:content';
-import { recipeCategories } from '../constants/recipeCategories';
+import recipeCategories from '../constants/recipeCategories';
 
 // 2. Define your collection(s)
 const recipeCollection = defineCollection({ 
