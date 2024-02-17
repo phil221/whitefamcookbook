@@ -3,8 +3,8 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-  const allBlogPosts = await getCollection('recipe');
-  return allBlogPosts.map(recipe => (
+  const recipes = await getCollection('recipe');
+  return recipes.map(recipe => (
   { 
     params: { 
       slug: recipe.slug,
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { recipe } = Astro.props;
-console.log(recipe)
+
 const { 
   instructions, 
   ingredients,

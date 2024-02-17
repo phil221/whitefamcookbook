@@ -2,14 +2,14 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-const allBlogPosts = await getCollection('recipe');
+const recipes = await getCollection('recipe');
 ---
 
 <Layout title="Recipes">
 	<main>
-		<h1>Recipes List</h1>
+		<h1>Recipes Index</h1>
 		{
-			allBlogPosts.map(blog => (
+			recipes.map(blog => (
 				<a href={`/recipes/${blog.slug}`}>{blog.data.name}</a>
 			))
 		}
