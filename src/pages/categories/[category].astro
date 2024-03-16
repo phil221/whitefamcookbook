@@ -1,21 +1,35 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import recipeCategories from '../../constants/recipeCategories';
+import transformStringIntoPath from "../../utils/transformStringIntoPath";
 
 export async function getStaticPaths() {
-  return recipeCategories.map(c => {
-    const formattedCategory = c.replace(/[^a-zA-Z ]/g, "").split(" ").join("-").toLowerCase();
-    return { params: { category: formattedCategory }}
+  const recipeCollection = await getCollection('recipe');
+
+  return recipeCollection.map(({ data }) => {
+    const formattedCategory = transformStringIntoPath(data.category);
+    return { 
+      params: { 
+        category: formattedCategory 
+      }, 
+      props: { 
+        recipes: recipeCollection
+      }
+    }
   });
 }
 
 const { category } = Astro.params;
+const { recipes } = Astro.props;
+const currentRecipes = recipes.filter(({ data }) => transformStringIntoPath(data.category) === category);
 ---
 
 <Layout title={category}>
   <main>
     <div class="category-content-wrapper">
+      {currentRecipes.map(r => (
+        <p>{r.data.name}</p>
+      ))}
     </div>
   </main>
 </Layout>
