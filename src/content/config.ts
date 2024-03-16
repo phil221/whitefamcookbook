@@ -15,7 +15,7 @@ const recipeCollection = defineCollection({
     instructions: z.array(z.string()),
     comments: z.string().optional(),
     nutritionFacts: z.string().optional(),
-    category: z.enum(recipeCategories).optional(),
+    category: z.enum(recipeCategories),
     image: z.string().optional(),
   }),
 });

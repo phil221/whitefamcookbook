@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import recipeCategories from '../../constants/recipeCategories';
+
+export async function getStaticPaths() {
+  return recipeCategories.map(c => {
+    const formattedCategory = c.replace(/[^a-zA-Z ]/g, "").split(" ").join("-").toLowerCase();
+    return { params: { category: formattedCategory }}
+  });
+}
+
+const { category } = Astro.params;
+---
+
+<Layout title={category}>
+  <main>
+    <div class="category-content-wrapper">
+    </div>
+  </main>
+</Layout>
+
+<style>
+
+</style>
