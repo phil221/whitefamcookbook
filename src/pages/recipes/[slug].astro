@@ -20,7 +20,7 @@ const { recipe } = Astro.props;
 
 const { 
   instructions, 
-  // ingredients,
+  ingredients,
   comments,
   name, 
   author,
@@ -40,11 +40,20 @@ const {
         <p>Makes {servingsNumber} servings</p>
         <p>Prep Time: {prepTime}</p>
       </div>
+      <div class="recipe-ingredients">
+        <ul>
+          { 
+            ingredients.map(item => (
+              <li>{item}</li>
+            ))
+          }
+        </ul>
+      </div>
       <div class="recipe-instructions">
         <ol>
           { 
-            instructions.map(instruction => (
-              <li>{instruction}</li>
+            instructions.map(item => (
+              <li>{item}</li>
             ))
           }
         </ol>

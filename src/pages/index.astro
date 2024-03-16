@@ -7,12 +7,16 @@ const recipes = await getCollection('recipe');
 
 <Layout title="Recipes">
 	<main>
-		<h1>Recipes Index</h1>
-		{
-			recipes.map(blog => (
-				<a href={`/recipes/${blog.slug}`}>{blog.data.name}</a>
-			))
-		}
+		<h1>Recipes</h1>
+		<ul>
+			{
+				recipes.map(blog => (
+					<li>
+						<a href={`/recipes/${blog.slug}`}>{blog.data.name}</a>
+					</li>
+				))
+			}
+		</ul>
 	</main>
 </Layout>	
 
